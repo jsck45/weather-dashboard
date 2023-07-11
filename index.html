@@ -3,10 +3,23 @@
 <head>
   <title>Weather Dashboard</title>
   <link rel="stylesheet" href="./assets/css/style.css"/>
-  </head>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.7/dayjs.min.js"></script>  
+</head>
   
 <body>
- 
+    <h1>Current Weather</h1>
+    <h2 id="formattedDate"></h2>
+    <form id="geocodingForm">
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" placeholder="Enter city name">
+        <button type="submit">Get Weather</button>
+    </form>
+    
+    <div id="coordinates"></div>
+
+    <div id="weather" style="text-transform: capitalize;"></div>
+
 
   <script src = "./assets/js/script.js"></script>
 </body>

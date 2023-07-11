@@ -1,0 +1,8 @@
+#city {
+    text-transform: capitalize;
+  }
+  
+#capitalizedCity::first-letter {
+    text-transform: capitalize;
+  }
+  
