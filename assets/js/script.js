@@ -44,7 +44,7 @@ function getWeather(city, latitude, longitude) {
       var weatherDiv = document.getElementById('weather');
       weatherDiv.innerHTML = `
       <h3>The current weather in ${city}:</h3>
-      <p>Temperature: ${data.main.temp}&deg;C</p>
+      <p>Temperature: ${data.main.temp.toFixed(0)}&deg;C</p>
       <p>Humidity: ${data.main.humidity}%</p>
       <p>Wind Speed: ${(data.wind.speed * 3.6).toFixed(0)}km/h</p>
       `;
@@ -75,7 +75,6 @@ function getForecast(city, latitude, longitude) {
 
         forecastByDay[forecastDate] = forecast;
 
-        // var icon = forecast.weather[0].icon;
         var humidity = forecast.main.humidity;
         var windSpeed = forecast.wind.speed * 3.6;
         var temperature = forecast.main.temp;
@@ -88,7 +87,7 @@ function getForecast(city, latitude, longitude) {
         var iconUrl = `https://openweathermap.org/img/w/${iconCode}.png`; // Construct the icon URL
 
         forecastElement.innerHTML = `
-          <p><strong>${forecastTime.toLocaleDateString()}</p>
+          <p><strong>${forecastTime.toLocaleDateString()}</strong></p>
           <img src="${iconUrl}" alt="Weather Icon"> 
           <p>${description}</p>
           <p>Temp: ${temperature.toFixed(0)}&deg;C</p>

@@ -1,5 +1,5 @@
 body {
-    background-image: url(/assets/images/iccup-xNtwmcRP-gw-unsplash.jpg); 
+    background-image: url("../images/iccup-xNtwmcRP-gw-unsplash.jpg"); 
     background-repeat: no-repeat;
     background-size: cover;
   }  
@@ -13,7 +13,7 @@ body {
   }
 
 #forecast {
-    background-color: aquamarine;
+    background-color: rgba(255, 255, 255, 0.5);
     padding: 20px;
     border-radius: 8px;
     font-weight: bold
@@ -22,8 +22,18 @@ body {
 .forecast-box {
     padding: 10px;
     border-radius: 8px;
-    margin-bottom: 20px;
-    background-color: aqua;
-    font-weight:100;
+    margin: 5px;
+    background-color: rgba(50, 121, 168, 0.5);
+    font-weight:400;
   }
+
+#forecastDays {
+    display:flex;
+    flex-direction: row;
+}
   
+#weather {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    border-radius: 8px;
+}
