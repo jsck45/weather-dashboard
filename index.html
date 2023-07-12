@@ -2,25 +2,38 @@
 <html>
 <head>
   <title>Weather Dashboard</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="./assets/css/style.css"/>
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.7/dayjs.min.js"></script>  
 </head>
   
 <body>
-    <h1>Current Weather</h1>
-    <h2 id="formattedDate"></h2>
-    <form id="geocodingForm">
-        <label for="city">City:</label>
-        <input type="text" id="city" name="city" placeholder="Enter city name">
-        <button type="submit">Get Weather</button>
+  <div class="container">
+    <h1 class="pt-5">Weather Dashboard</h1>
+    <h2 class="py-4" id="formattedDate"></h2>
+
+    <form id="geocodingForm" class="form-inline">
+      <div class="form-group mr-2">
+        <label for="city" class="mr-2">City:</label>
+        <input type="text" class="form-control" id="city" name="city" placeholder="Enter city name">
+      </div>
+      <button type="submit" class="btn btn-primary">Get Weather</button>
     </form>
-    
-    <div id="coordinates"></div>
+      
 
-    <div id="weather" style="text-transform: capitalize;"></div>
+    <div class="row mt-4">
+      <div class="col-lg-3">
+        <div id="weather" style="text-transform: capitalize;"></div>
+      </div>
+      <div class="col-lg-9">
+        <div id="forecast">5 day Weather Forecast
+          <div id="forecastDays"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-
-  <script src = "./assets/js/script.js"></script>
+  <script src="./assets/js/script.js"></script>
 </body>
 </html>

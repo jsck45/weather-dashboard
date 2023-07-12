@@ -1,8 +1,29 @@
+body {
+    background-image: url("path/to/your/image.jpg"); /* Replace with the path to your background image */
+    background-repeat: no-repeat;
+    background-size: cover;
+  }  
+
 #city {
     text-transform: capitalize;
   }
   
 #capitalizedCity::first-letter {
     text-transform: capitalize;
+  }
+
+#forecast {
+    background-color: aquamarine;
+    padding: 20px;
+    border-radius: 8px;
+    font-weight: bold
+}
+  
+.forecast-box {
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    background-color: aqua;
+    font-weight:100;
   }
   
