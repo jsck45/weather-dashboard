@@ -10,9 +10,9 @@
 <body>
   <div class="container">
     <h1 class="pt-5">Weather Dashboard</h1>
-    <h2 class="py-4" id="formattedDate"></h2>
+    <!-- <h2 class="py-4" id="formattedDate"></h2> -->
 
-    <form id="geocodingForm" class="form-inline">
+    <form id="geocodingForm" class="form-inline pt-4">
       <div class="form-group mr-2">
         <label for="city" class="mr-2">City:</label>
         <input type="text" class="form-control" id="city" name="city" placeholder="Enter city name">
@@ -20,18 +20,34 @@
       <button type="submit" class="btn btn-primary">Get Weather</button>
     </form>
       
+    <div class = "row mt-4">
 
-      <div class="col-lg-3 py-4">
+      <div class="col-lg-3 py-3">
+        <div id="formattedDate" style="text-transform: capitalize;"></div>
+      </div>
+
+      
+
+      <div class="col-lg-6 py-3">
         <div id="weather" style="text-transform: capitalize;">
-          <h3 class="text-center">Today</h3>
+          <h5 class="text-center">Today</h5>
         </div>
       </div>
-      <div class="col-lg-12">
-        <div id="forecast">
-          <h3 class="text-center">5 day Weather Forecast</h3>
-          <div id="forecastDays"></div>
+
+      <div class = "col-lg-3 py-3">
+        <div id="recentSearches" style="text-transform: capitalize;">
+          <h5>Recent Searches</h5>
         </div>
       </div>
+
+    </div>
+
+    <div class="py-3">
+      <div id="forecast">
+        <h5 class="text-center">5 day Weather Forecast</h5>
+        <div id="forecastDays" class="row"></div>
+      </div>
+    </div>
   </div>
 
   <script src="./assets/js/script.js"></script>

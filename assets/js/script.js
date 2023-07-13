@@ -1,5 +1,5 @@
 var currentDate = dayjs();
-  var formattedDate = currentDate.format('ddd D MMM, YYYY');
+  var formattedDate = currentDate.format('dddd D MMM, YYYY');
   document.getElementById('formattedDate').textContent = formattedDate;
 
 // Function to handle form submission for geocoding
@@ -8,6 +8,8 @@ function handleSubmit(event) {
 
   // Get the city value from the input field
   var city = document.getElementById('city').value;
+
+  saveSearch(city);
 
   // Make the API call to OpenWeatherMap Geocoding API
   var geocodingUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=d460e8dccd9357124bd36c9cb150895c`;
@@ -43,10 +45,16 @@ function getWeather(city, latitude, longitude) {
     .then(data => {
       var weatherDiv = document.getElementById('weather');
       weatherDiv.innerHTML = `
-      <h3>The current weather in ${city}:</h3>
-      <p>Temperature: ${data.main.temp.toFixed(0)}&deg;C</p>
-      <p>Humidity: ${data.main.humidity}%</p>
-      <p>Wind Speed: ${(data.wind.speed * 3.6).toFixed(0)}km/h</p>
+      <h5>The current weather in ${city}:</h5>
+        <div class="weather-info">
+          <img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png" alt="Weather Icon" class="weather-icon">
+          <div class="weather-details">
+            <p>${data.weather[0].description}</p>
+            <p>Temperature: ${data.main.temp.toFixed(0)}&deg;C</p>
+            <p>Humidity: ${data.main.humidity}%</p>
+            <p>Wind Speed: ${(data.wind.speed * 3.6).toFixed(0)} km/h</p>
+          </div>
+        </div>
       `;
     })
     .catch(error => {
@@ -75,6 +83,10 @@ function getForecast(city, latitude, longitude) {
 
         forecastByDay[forecastDate] = forecast;
 
+        if (Object.keys(forecastByDay).length === 1) {
+          continue;
+        }
+
         var humidity = forecast.main.humidity;
         var windSpeed = forecast.wind.speed * 3.6;
         var temperature = forecast.main.temp;
@@ -90,7 +102,7 @@ function getForecast(city, latitude, longitude) {
           <p><strong>${forecastTime.toLocaleDateString()}</strong></p>
           <img src="${iconUrl}" alt="Weather Icon"> 
           <p>${description}</p>
-          <p>Temp: ${temperature.toFixed(0)}&deg;C</p>
+          <p>Temperature: ${temperature.toFixed(0)}&deg;C</p>
           <p>Humidity: ${humidity}%</p>
           <p>Wind Speed: ${windSpeed.toFixed(0)} km/h</p>
         `;
@@ -103,5 +115,57 @@ function getForecast(city, latitude, longitude) {
     });
 }
 
+// Function to save the city to local storage
+function saveSearch(city) {
+  var searches = localStorage.getItem('recentSearches');
+  var searchArray = searches ? JSON.parse(searches) : [];
+
+  // Check if the city is already in the recent searches
+  if (searchArray.includes(city)) {
+    return; // Don't save duplicate entries
+  }
+
+  // Add the city to the recent searches
+  searchArray.push(city);
+
+  // Limit the recent searches to 5 entries
+  if (searchArray.length > 5) {
+    searchArray = searchArray.slice(-5);
+  }
+
+  // Save the updated recent searches to local storage
+  localStorage.setItem('recentSearches', JSON.stringify(searchArray));
+
+  // Update the recent searches display
+  displayRecentSearches();
+}
+
+// Function to display the recent searches
+function displayRecentSearches() {
+  var recentSearchesDiv = document.getElementById('recentSearches');
+  recentSearchesDiv.innerHTML = "<h5>Recent Searches</h5>";
+
+  var searches = localStorage.getItem('recentSearches');
+  var searchArray = searches ? JSON.parse(searches) : [];
+
+  for (var i = searchArray.length - 1; i >= 0; i--) {
+    var searchItem = document.createElement("a");
+    searchItem.textContent = searchArray[i];
+    searchItem.href = "#";
+    searchItem.classList.add("recent-search-link");
+    searchItem.addEventListener("click", handleRecentSearchClick);
+    recentSearchesDiv.appendChild(searchItem);
+  }
+}
+
+function handleRecentSearchClick(event) {
+  event.preventDefault();
+  var city = event.target.textContent;
+  document.getElementById('city').value = city; // Set the input field value to the selected city
+  handleSubmit(event); // Trigger form submission to retrieve weather results
+}
+
+// Call the displayRecentSearches function on page load
+displayRecentSearches();
 
 document.getElementById('geocodingForm').addEventListener('submit', handleSubmit);
