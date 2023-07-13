@@ -17,7 +17,6 @@ body {
     border-radius: 8px;
     padding: 20px;
     font-weight: bold;
-    /* justify-content: space-between; */
 }
   
 .forecast-box {
@@ -31,26 +30,26 @@ body {
 #forecastDays {
     display:flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content:space-evenly;
 }
   
 #weather {
     background-color: rgba(255, 255, 255, 0.5);
     padding: 20px;
     border-radius: 8px;
-    /* margin-right: 15px; */
+    /* height: 220px; */
 }
 
 #recentSearches {
     background-color: rgba(255, 255, 255, 0.5);
     padding: 20px;
     border-radius: 8px;
-    /* margin-left: 15px; */
+    /* height: 220px; */
 }
 
 .recent-search-link {
     display: block;
-    margin-bottom: 5px; /* Optional: Add margin between the links */
+    margin-bottom: 5px; 
   }
 
 .weather-info {
@@ -60,22 +59,33 @@ body {
   }
   
 .weather-icon {
-    width: 100px; /* Adjust the size of the weather icon as needed */
+    width: 100px; 
     height: 100px;
-    margin-right: 20px; /* Add spacing between the icon and text */
+    margin-right: 20px; 
   }
 
 #formattedDate {
+    /* height: 220px; */
     background-color: rgba(255, 255, 255, 0.5);
     padding: 20px;
     border-radius: 8px;
-    font-size: 40px;
+    font-size: 39px;
     text-align: center;
+    align-content: center;
 }
   
+#topContainer {
+    height: 250px;
+}
   
 @media (max-width: 767px) {
     #forecastDays .forecast-box {
         flex-direction: column;
+    }
+
+    #weather {
+        background-color: rgba(255, 255, 255, 0.5);
+        padding: 20px;
+        border-radius: 8px;
     }
 }

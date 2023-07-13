@@ -129,8 +129,8 @@ function saveSearch(city) {
   searchArray.push(city);
 
   // Limit the recent searches to 5 entries
-  if (searchArray.length > 5) {
-    searchArray = searchArray.slice(-5);
+  if (searchArray.length > 6) {
+    searchArray = searchArray.slice(-6);
   }
 
   // Save the updated recent searches to local storage
