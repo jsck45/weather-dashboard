@@ -3,17 +3,16 @@
 <head>
   <title>Weather Dashboard</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="./assets/css/style.css"/>
+  <link rel="stylesheet" href="./assets/css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.7/dayjs.min.js"></script>  
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet">
 </head>
   
 <body>
   <div class="container">
     <h1 class="pt-5">Weather Dashboard</h1>
-    <!-- <h2 class="py-4" id="formattedDate"></h2> -->
 
     <form id="geocodingForm" class="form-inline pt-4">
       <div class="form-group mr-2">
@@ -24,14 +23,13 @@
     </form>
       
     <div class="row mt-4">
-
-      <div class="col-lg-3 py-3 order-2 order-lg-1">
+      <div class="col-lg-3 col-sm-6 order-sm-2 py-3 order-2 order-lg-1">
         <div id="recentSearches" style="text-transform: capitalize;" class="box h-100 d-flex flex-column">
           <h5>Recent Searches</h5>
         </div>
       </div>
 
-      <div class="col-lg-3 py-3 order-3 order-lg-2">
+      <div class="col-lg-3 col-sm-6 order-sm-2 py-3 order-3 order-lg-2">
         <div id="formattedDate" style="text-transform: capitalize;" class="box h-100 d-flex flex-column"></div>
       </div>
 
@@ -40,15 +38,17 @@
           <h5>Currently in</h5>
         </div>
       </div>
+    </div>
 
+    <div class="row mt-4">
       <div class="col-12 py-3 order-4">
         <div id="forecast">
           <h5 class="text-center">5 day Weather Forecast</h5>
           <div id="forecastDays" class="row"></div>
         </div>
       </div>
-
     </div>
+
   </div>
 
   <script src="./assets/js/script.js"></script>

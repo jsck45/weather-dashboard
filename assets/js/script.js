@@ -1,33 +1,30 @@
-var currentDate = dayjs();
-var formattedDate = currentDate.format('dddd,') + "<br>" + currentDate.format('D MMMM') + "<br>" + currentDate.format('YYYY');
+// add today's date
+const currentDate = dayjs();
+const formattedDate = currentDate.format('dddd,') + "<br>" + currentDate.format('D MMMM') + "<br>" + currentDate.format('YYYY');document.getElementById('formattedDate').innerHTML = formattedDate;
 document.getElementById('formattedDate').innerHTML = formattedDate;
 
-
-// Function to handle form submission for geocoding
+// on form submission, relevant data is fetched from the open weather API and displayed on the page
 function handleSubmit(event) {
   event.preventDefault();
 
-  // Get the city value from the input field
-  var city = document.getElementById('city').value;
+  const city = document.getElementById('city').value;
 
   saveSearch(city);
 
-  // Make the API call to OpenWeatherMap Geocoding API
-  var geocodingUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=d460e8dccd9357124bd36c9cb150895c`;
+  // lat/long is detected from user input as the weather API requires it
+  const geocodingUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=d460e8dccd9357124bd36c9cb150895c`;
 
   fetch(geocodingUrl)
     .then(response => response.json())
     .then(data => {
       console.log(data);
 
-      // Extract latitude and longitude from the API response
-      var latitude = data[0]?.lat;
-      var longitude = data[0]?.lon;
+      const latitude = data[0]?.lat;
+      const longitude = data[0]?.lon;
 
       if (latitude && longitude) {
-        
         getWeather(city, latitude, longitude); 
-        getForecast(city,latitude, longitude);
+        getForecast(city, latitude, longitude);
       } else {
         console.log('Latitude or longitude not found in the API response.');
       }
@@ -37,20 +34,19 @@ function handleSubmit(event) {
     });
 }
 
-// Function to make the API call for weather data
+// lat/long is input into the API fetch to return results for the current weather
 function getWeather(city, latitude, longitude) {
-  var apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=d460e8dccd9357124bd36c9cb150895c&units=metric`;
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=d460e8dccd9357124bd36c9cb150895c&units=metric`;
 
   fetch(apiUrl)
     .then(response => response.json())
     .then(data => {
-      var weatherDiv = document.getElementById('weather');
+      const weatherDiv = document.getElementById('weather');
       weatherDiv.innerHTML = `
-      <h5 class = "pb-2">Currently in ${city}:</h5>
-      <div class="weather-info">
-
-      <div id="large-temp">${data.main.temp.toFixed(0)}&deg;C
-          <img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png" alt="Weather Icon" class="weather-icon">
+        <h5 class="pb-2">Currently in ${city}:</h5>
+        <div class="weather-info">
+          <div id="large-temp">${data.main.temp.toFixed(0)}&deg;C
+            <img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png" alt="Weather Icon" class="weather-icon">
           </div>
           <div class="weather-details">
             <p>${data.weather[0].description}</p>
@@ -58,34 +54,29 @@ function getWeather(city, latitude, longitude) {
             <p>Humidity: ${data.main.humidity}%</p>
             <p>Wind Speed: ${(data.wind.speed * 3.6).toFixed(0)} km/h</p>
           </div>
-          
-          
-
         </div>
       `;
-
     })
     .catch(error => {
       console.log('Error:', error);
     });
 }
 
-
-
+// function for 5 day forecast
 function getForecast(city, latitude, longitude) {
-  var apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=d460e8dccd9357124bd36c9cb150895c&units=metric`;
+  const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=d460e8dccd9357124bd36c9cb150895c&units=metric`;
 
   fetch(apiUrl)
     .then(response => response.json())
     .then(data => {
-      var forecastDaysDiv = document.getElementById('forecastDays');
+      const forecastDaysDiv = document.getElementById('forecastDays');
       forecastDaysDiv.innerHTML = "";
-      var forecastByDay = {};
+      const forecastByDay = {};
 
       for (let index = 0; index < data.list.length; index++) {
-        var forecast = data.list[index];
-        var forecastTime = new Date(forecast.dt * 1000);
-        var forecastDate = forecastTime.toLocaleDateString('en-GB').split('/').reverse().join('');
+        const forecast = data.list[index];
+        const forecastTime = new Date(forecast.dt * 1000);
+        const forecastDate = forecastTime.toLocaleDateString('en-GB').split('/').reverse().join('');
 
         if (forecastByDay[forecastDate]) {
           continue;
@@ -97,16 +88,17 @@ function getForecast(city, latitude, longitude) {
           continue;
         }
 
-        var humidity = forecast.main.humidity;
-        var windSpeed = forecast.wind.speed * 3.6;
-        var temperature = forecast.main.temp;
-        var description = forecast.weather[0].description;
+        const humidity = forecast.main.humidity;
+        // multiplied by 3.6 to convert the wind speed from m/s to km/hr
+        const windSpeed = forecast.wind.speed * 3.6;
+        const temperature = forecast.main.temp;
+        const description = forecast.weather[0].description;
 
-        var forecastElement = document.createElement("div"); // Create a div container for each day's forecast
-        forecastElement.classList.add("forecast-box"); // Add a CSS class for styling
+        const forecastElement = document.createElement("div");
+        forecastElement.classList.add("forecast-box");
 
-        var iconCode = forecast.weather[0].icon; // Get the icon code
-        var iconUrl = `https://openweathermap.org/img/w/${iconCode}.png`; // Construct the icon URL
+        const iconCode = forecast.weather[0].icon;
+        const iconUrl = `https://openweathermap.org/img/w/${iconCode}.png`;
 
         forecastElement.innerHTML = `
           <p><strong>${forecastTime.toLocaleDateString()}</strong></p>
@@ -125,42 +117,36 @@ function getForecast(city, latitude, longitude) {
     });
 }
 
-// Function to save the city to local storage
+// save recent searches to local storage and append it to the list
 function saveSearch(city) {
-  var searches = localStorage.getItem('recentSearches');
-  var searchArray = searches ? JSON.parse(searches) : [];
+  const searches = localStorage.getItem('recentSearches');
+  let searchArray = searches ? JSON.parse(searches) : [];
 
-  // Check if the city is already in the recent searches
   if (searchArray.includes(city)) {
-    return; // Don't save duplicate entries
+    return;
   }
 
-  // Add the city to the recent searches
   searchArray.push(city);
 
-  // Limit the recent searches to 5 entries
-  if (searchArray.length > 6) {
-    searchArray = searchArray.slice(-6);
+  if (searchArray.length > 5) {
+    searchArray = searchArray.slice(-5);
   }
 
-  // Save the updated recent searches to local storage
   localStorage.setItem('recentSearches', JSON.stringify(searchArray));
-
-  // Update the recent searches display
   displayRecentSearches();
 }
 
-// Function to display the recent searches
 function displayRecentSearches() {
-  var recentSearchesDiv = document.getElementById('recentSearches');
+  const recentSearchesDiv = document.getElementById('recentSearches');
   recentSearchesDiv.innerHTML = "<h5>Recent Searches</h5>";
 
-  var searches = localStorage.getItem('recentSearches');
-  var searchArray = searches ? JSON.parse(searches) : [];
+  const searches = localStorage.getItem('recentSearches');
+  const searchArray = searches ? JSON.parse(searches) : [];
 
-  for (var i = searchArray.length - 1; i >= 0; i--) {
-    var searchItem = document.createElement("a");
+  for (let i = searchArray.length - 1; i >= 0; i--) {
+    const searchItem = document.createElement("a");
     searchItem.textContent = searchArray[i];
+    // make the list items a link that will repopulate the input field and display results
     searchItem.href = "#";
     searchItem.classList.add("recent-search-link");
     searchItem.addEventListener("click", handleRecentSearchClick);
@@ -170,12 +156,10 @@ function displayRecentSearches() {
 
 function handleRecentSearchClick(event) {
   event.preventDefault();
-  var city = event.target.textContent;
-  document.getElementById('city').value = city; // Set the input field value to the selected city
-  handleSubmit(event); // Trigger form submission to retrieve weather results
+  const city = event.target.textContent;
+  document.getElementById('city').value = city;
+  handleSubmit(event);
 }
 
-// Call the displayRecentSearches function on page load
 displayRecentSearches();
-
 document.getElementById('geocodingForm').addEventListener('submit', handleSubmit);
