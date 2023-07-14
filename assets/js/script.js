@@ -12,7 +12,7 @@ function handleSubmit(event) {
   saveSearch(city);
 
   // lat/long is detected from user input as the weather API requires it
-  const geocodingUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=d460e8dccd9357124bd36c9cb150895c`;
+  const geocodingUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=d460e8dccd9357124bd36c9cb150895c`;
 
   fetch(geocodingUrl)
     .then(response => response.json())
