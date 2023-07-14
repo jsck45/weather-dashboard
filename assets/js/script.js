@@ -1,6 +1,7 @@
 var currentDate = dayjs();
-  var formattedDate = currentDate.format('dddd D MMM, YYYY');
-  document.getElementById('formattedDate').textContent = formattedDate;
+var formattedDate = currentDate.format('dddd,') + "<br>" + currentDate.format('D MMMM') + "<br>" + currentDate.format('YYYY');
+document.getElementById('formattedDate').innerHTML = formattedDate;
+
 
 // Function to handle form submission for geocoding
 function handleSubmit(event) {
@@ -45,22 +46,31 @@ function getWeather(city, latitude, longitude) {
     .then(data => {
       var weatherDiv = document.getElementById('weather');
       weatherDiv.innerHTML = `
-      <h5>The current weather in ${city}:</h5>
-        <div class="weather-info">
+      <h5 class = "pb-2">Currently in ${city}:</h5>
+      <div class="weather-info">
+
+      <div id="large-temp">${data.main.temp.toFixed(0)}&deg;C
           <img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png" alt="Weather Icon" class="weather-icon">
+          </div>
           <div class="weather-details">
             <p>${data.weather[0].description}</p>
             <p>Temperature: ${data.main.temp.toFixed(0)}&deg;C</p>
             <p>Humidity: ${data.main.humidity}%</p>
             <p>Wind Speed: ${(data.wind.speed * 3.6).toFixed(0)} km/h</p>
           </div>
+          
+          
+
         </div>
       `;
+
     })
     .catch(error => {
       console.log('Error:', error);
     });
 }
+
+
 
 function getForecast(city, latitude, longitude) {
   var apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=d460e8dccd9357124bd36c9cb150895c&units=metric`;
