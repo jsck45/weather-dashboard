@@ -2,7 +2,8 @@ body {
     background-image: url("../images/iccup-xNtwmcRP-gw-unsplash.jpg"); 
     background-repeat: no-repeat;
     background-size: cover;
-  }  
+    font-family: 'Raleway', sans-serif; 
+ }  
 
 #city {
     text-transform: capitalize;
