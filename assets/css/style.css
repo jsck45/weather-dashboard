@@ -2,6 +2,7 @@ body {
   background-image: url("../images/iccup-xNtwmcRP-gw-unsplash.jpg"); 
   background-repeat: no-repeat;
   background-size: cover;
+  height: 100vh;
   font-family: 'Raleway', sans-serif; 
 }  
 
@@ -38,14 +39,12 @@ body {
   background-color: rgba(255, 255, 255, 0.5);
   padding: 20px;
   border-radius: 8px;
-  /* height: 220px; */
 }
 
 #recentSearches {
   background-color: rgba(255, 255, 255, 0.5);
   padding: 20px;
   border-radius: 8px;
-  /* height: 220px; */
 }
 
 .recent-search-link {
