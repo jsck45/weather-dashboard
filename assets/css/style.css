@@ -1,7 +1,6 @@
 body {
   background-image: url("../images/iccup-xNtwmcRP-gw-unsplash.jpg"); 
   background-repeat: no-repeat;
-  background-size: cover;
   height: 100vh;
   font-family: 'Raleway', sans-serif; 
 }  
@@ -97,5 +96,7 @@ font-size: 400%;
 
   #forecastDays {
     flex-direction: column;
+    justify-content: flex-start;
   }
+  
 }
