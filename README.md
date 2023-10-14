@@ -26,7 +26,7 @@ THEN I am again presented with current and future conditions for that city
 
 ## Technologies
 
-Javascript, Bootstrap, OpenWeather API
+Javascript, Bootstrap, OpenWeatherMap API
 
 ## Screenshot
 
