@@ -24,6 +24,12 @@ WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city
 ```
 
+## Technologies
+
+Javascript, Bootstrap, OpenWeather API
+
+## Screenshot
+
 ![Screenshot of deployed website](./assets/images/Screenshot.png)
 
 ## Link
